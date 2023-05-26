@@ -60,6 +60,9 @@
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#research-supervisions">Research Supervisions</button>
                 </li>
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#teachings">Teachings</button>
+                </li>
 
               </ul>
               <div class="tab-content pt-2">
@@ -105,6 +108,47 @@
                     <div class="col-lg-9 col-md-8">{{ $user->email }}</div>
                   </div>
 
+                </div>
+
+
+                <div class="tab-pane fade teachings" id="teachings">
+                  <h5 class="card-title">Teachings</h5>
+                  <h6 class="text-end pe-5"><a class="btn btn-primary" href="{{route('teachings.create')}}">Add new</a></h6>
+
+                  <div class="row">
+                    <table class="table table-responsive">
+                      <thead>
+                        <tr>
+                          <th>Course name</th>
+                          <th>Course Code</th>
+                          <th width="200px">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @forelse ($teachings as $tg)
+                        <tr>
+                          <td>{{ $tg->course_name }}</td>
+                          <td>{{ $tg->course_code }}</td>
+                         
+                          <td>
+                            <a href="{{ route('teachings.edit', $tg->id) }}" class="btn btn-sm btn-outline-warning">Edit</a>
+                            <form class="d-inline" method="post" action="{{ route('teachings.destroy', $tg->id) }}">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                          </td>
+                        </tr>
+                        @empty
+                        <tr>
+                          <td colspan="6" class="text-center">
+                            No Teaching information found.
+                          </td>
+                        </tr>
+                        @endforelse
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
 
                 {{-- Research supervisions --}}
@@ -155,6 +199,47 @@
                     </table>
                   </div>
                 </div>
+
+
+                {{-- <div class="tab-pane fade teachings" id="teachings">
+                  <h5 class="card-title">Teachings</h5>
+                  <h6 class="text-end pe-5"><a class="btn btn-primary" href="{{route('teachings.create')}}">Add new</a></h6>
+
+                  <div class="row">
+                    <table class="table table-responsive">
+                      <thead>
+                        <tr>
+                          <th>Course name</th>
+                          <th>Course Code</th>
+                          <th width="200px">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @forelse ($teachings as $tg)
+                        <tr>
+                          <td>{{ $tg->course_name }}</td>
+                          <td>{{ $tg->course_code }}</td>
+                         
+                          <td>
+                            <a href="{{ route('teachings.edit', $tg->id) }}" class="btn btn-sm btn-outline-warning">Edit</a>
+                            <form class="d-inline" method="post" action="{{ route('teachings.destroy', $tg->id) }}">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                          </td>
+                        </tr>
+                        @empty
+                        <tr>
+                          <td colspan="6" class="text-center">
+                            No Teaching information found.
+                          </td>
+                        </tr>
+                        @endforelse
+                      </tbody>
+                    </table>
+                  </div>
+                </div> --}}
 
 {{-- profile edit --}}
                 <div class="tab-pane fade profile-edit pt-3 " id="profile-edit">

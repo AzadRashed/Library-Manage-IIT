@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResearchSupervisionController;
+use App\Http\Controllers\TeachingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ Route::get('/', function () {
     return view('frontend/home');
 })->name('homepage');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth','isAdmin'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 // frontend all route
@@ -70,6 +71,9 @@ Route::middleware('auth')->controller(EventController::class)->group(function(){
 
 Route::middleware('auth')->group(function() {
   Route::resource('research-supervisions', ResearchSupervisionController::class);
+});
+Route::middleware('auth')->group(function() {
+  Route::resource('teachings', TeachingController::class);
 });
 
 Route::middleware('auth')->controller(ProfileController::class)->group(function(){

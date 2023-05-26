@@ -15,6 +15,7 @@ class ResearchSupervisionController extends Controller
      */
     public function index()
     {
+        
         $research_supervisions = auth()->user()->researchSupervisions()->get();
         return view('frontend.researchSupervision.index', compact('research_supervisions'));
     }

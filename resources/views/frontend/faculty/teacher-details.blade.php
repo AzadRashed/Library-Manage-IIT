@@ -192,21 +192,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Data Structure</td>
-                                    <td>CSE3105</td>
-                                </tr>
-                                <tr>
-
-                                    <td>Etics</td>
-                                    <td>Se320</td>
-                                </tr>
-                                <tr>
-
-                                    <td>Security</td>
-
-                                </tr>
-
+                                {{-- $teacherDetails->Teaching as $rs --}}
+                                @forelse ($teacherDetails->Teaching as $tg)
+                                    <tr>
+                                        <td>{{ $tg->course_name }}</td>
+                                        <td>{{ $tg->course_code }}</td>
+                                       
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">
+                                            No Teachings information found
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            
                             </tbody>
                         </table>
                     </div>
